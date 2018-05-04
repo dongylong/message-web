@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--<util:properties id="hostProp">-->
+    <!-- New version -->
+    <util:properties id="hostProp" location="classpath:config.properties"/>
+
+    <context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true"/>
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.noriental.messageweb.*" />
+
+    <!--Config PlaceholderConfigurer-->
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="order" value="1"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <!--<property name="propertySources" ref="zookeeperSources"/>-->
+        <property name="locations">
+            <list>
+                <value>classpath:config.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--短信平台配置-->
+    <!--<bean id="diy09" class="com.noriental.messageweb.message.app.Diy09"/>-->
+    <!--<bean id="initors" class="java.util.ArrayList">-->
+        <!--<constructor-arg>-->
+            <!--<list>-->
+                <!--<ref bean="diy09"/>-->
+            <!--</list>-->
+        <!--</constructor-arg>-->
+    <!--</bean>-->
+
+</beans>
